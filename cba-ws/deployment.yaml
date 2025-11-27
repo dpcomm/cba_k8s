@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cba-ws
+  namespace: cba-connect
+  labels:
+    app: cba-ws
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: cba-ws
+  template:
+    metadata:
+      labels:
+        app: cba-ws
+    spec:
+      containers:
+        - name: cba-ws
+          image: hooooooujun/cba-ws:251127
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8080

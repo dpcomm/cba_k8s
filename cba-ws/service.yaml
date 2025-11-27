@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: cba-ws
+  namespace: cba-connect
+  labels:
+    app: cba-ws
+spec:
+  selector:
+    app: cba-ws
+  ports:
+    - name: http
+      port: 80
+      targetPort: 8080
+      protocol: TCP
+  type: ClusterIP

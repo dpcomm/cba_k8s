@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cba-was
+  namespace: cba-connect
+  labels:
+    app: cba-was
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: cba-was
+  template:
+    metadata:
+      labels:
+        app: cba-was
+    spec:
+      containers:
+        - name: cba-was
+          image: hooooooujun/cba-was:251127-2
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 3000
+          envFrom:
+            - secretRef:
+                name: cba-was-env
