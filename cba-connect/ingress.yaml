@@ -5,6 +5,7 @@ metadata:
   namespace: cba-connect
   annotations:
     cert-manager.io/cluster-issuer: "letsencrypt-prod"
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
 spec:
   ingressClassName: nginx
   tls:
@@ -15,13 +16,6 @@ spec:
     - host: recba.me
       http:
         paths:
-          - path: /
-            pathType: Prefix
-            backend:
-              service:
-                name: cba-ws
-                port:
-                  number: 80
           - path: /api
             pathType: Prefix
             backend:
@@ -29,3 +23,19 @@ spec:
                 name: cba-was
                 port:
                   number: 3000
+
+          - path: /management
+            pathType: Prefix
+            backend:
+              service:
+                name: cba-management
+                port:
+                  number: 80
+
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: cba-ws
+                port:
+                  number: 80

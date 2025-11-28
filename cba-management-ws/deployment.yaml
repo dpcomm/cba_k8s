@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cba-management
+  namespace: cba-connect
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: cba-management
+  template:
+    metadata:
+      labels:
+        app: cba-management
+    spec:
+      containers:
+        - name: management
+          image: hooooooujun/cba-management:latest
+          ports:
+            - containerPort: 80
